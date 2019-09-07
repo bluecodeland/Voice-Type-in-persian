@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=0 , initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+        
+    </div>
+
+    <script>
+    
+        window.speechRecognition = window.speechRecognition || window.webkitSpeechRecognition;
+        let container = document.querySelector('.container');
+        let p = document.createElement('p');
+        let span = document.createElement('span');
+        const recogniton = new speechRecognition();
+        recogniton.lang = 'fa-IR';
+        recogniton.interimResults = true;
+        recogniton.start();
+        recogniton.addEventListener('end', recogniton.start)
+        recogniton.addEventListener('result', (e) => {
+            container.appendChild(p);
+            let transcript = Array.from(e.results).map((result) => {
+                 return result[0];
+                 
+            })
+            .map((result) => {
+                return result.transcript;
+            })
+            .join(' ');
+            if(transcript = "سلام" ) {
+                     alert("سلام به خودت");
+                 }
+            span.textContent = transcript;
+            p.appendChild(span);
+            console.log(transcript);
+        })
+        
+    
+    </script>
+</body>
+</html>
